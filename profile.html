@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Profile</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-box">
+      <div class="orbit"></div>
+      <h1>Profile</h1>
+      <p>Getting your identity...</p>
+    </div>
+  </div>
+
+  <div class="app-layout">
+      <div class="app-layout">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+      ☰
+    </button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <aside class="sidebar">
+      <a class="brand" href="./dashboard.html"><span class="logo-mark small">LA</span><strong>LateAgain</strong></a>
+      <nav class="nav-links">
+        <a href="./dashboard.html">Dashboard</a>
+        <a class="active" href="./profile.html">Profile</a>
+        <a href="./friends.html">Friends</a>
+        <a href="./projects.html">Projects</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <p id="userEmail" class="muted tiny"></p>
+        <button id="logoutBtn" class="btn ghost full">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal data</p>
+          <h1>Profile & Goals</h1>
+        </div>
+      </header>
+
+      <section class="profile-layout">
+        <article class="card profile-preview">
+          <img id="profileImagePreview" class="avatar-xl" src="" alt="Profile picture preview" />
+          <h2 id="previewName">Your Name</h2>
+          <p id="previewEmail" class="muted"></p>
+          <p id="previewBio" class="profile-bio muted">Write a bio to make your profile less mysterious.</p>
+          <div class="goal-chips" id="goalChips"></div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Edit profile</h2>
+            <p class="muted">Friends can see your bio, goals, and productivity stats.</p>
+          </div>
+
+          <form id="profileForm" class="form-stack">
+            <label>
+              Display name
+              <input id="displayName" required placeholder="Mohamed" />
+            </label>
+
+            <label>
+              Bio
+              <textarea id="bio" maxlength="280" placeholder="A short intro about you..."></textarea>
+            </label>
+
+            <label>
+              Profile picture
+              <input id="profilePic" type="file" accept="image/*" />
+              <span class="hint">Uses Cloudinary unsigned upload preset. You can also leave it empty.</span>
+            </label>
+
+            <div class="form-row">
+              <label>
+                Add goal
+                <input id="goalInput" placeholder="Finish graduation project" />
+              </label>
+              <button id="addGoalBtn" type="button" class="btn secondary align-end">Add goal</button>
+            </div>
+
+            <div id="goalsList" class="item-list slim"></div>
+
+            <button class="btn primary" type="submit">Save profile</button>
+            <p id="profileMessage" class="message"></p>
+          </form>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/js/pages/profile.js"></script>
+</body>
+</html>

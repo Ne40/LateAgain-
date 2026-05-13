@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Project</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-box">
+      <div class="orbit"></div>
+      <h1>Project</h1>
+      <p>Opening board...</p>
+    </div>
+  </div>
+
+  <div class="app-layout">
+      <div class="app-layout">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+      ☰
+    </button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <aside class="sidebar">
+      <a class="brand" href="./dashboard.html"><span class="logo-mark small">LA</span><strong>LateAgain</strong></a>
+      <nav class="nav-links">
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./friends.html">Friends</a>
+        <a class="active" href="./projects.html">Projects</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <p id="userEmail" class="muted tiny"></p>
+        <button id="logoutBtn" class="btn ghost full">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Project board</p>
+          <h1 id="projectTitle">Project</h1>
+          <p id="projectDescriptionText" class="muted"></p>
+        </div>
+        <a class="btn ghost" href="./projects.html">← All projects</a>
+      </header>
+
+      <section class="grid-3">
+        <article class="card stat-card">
+          <span class="muted">Tasks</span>
+          <strong id="projectTaskCount">0</strong>
+        </article>
+        <article class="card stat-card">
+          <span class="muted">Done</span>
+          <strong id="projectDoneCount">0</strong>
+        </article>
+        <article class="card stat-card">
+          <span class="muted">Progress</span>
+          <strong id="projectProgress">0%</strong>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="card">
+          <div class="card-head">
+            <h2>Invite member</h2>
+            <p class="muted">Invitation appears inside their LateAgain account.</p>
+          </div>
+          <form id="inviteForm" class="form-stack compact">
+            <label>
+              Email
+              <input id="inviteEmail" type="email" required placeholder="member@email.com" />
+            </label>
+            <label>
+              Role
+              <select id="inviteRole">
+                <option value="member">Member</option>
+                <option value="admin">Admin</option>
+              </select>
+            </label>
+            <button class="btn primary" type="submit">Send invite</button>
+            <p id="inviteMessage" class="message"></p>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Members</h2>
+            <p class="muted">People who can access this board.</p>
+          </div>
+          <div id="membersList" class="item-list"></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid lower">
+        <article class="card">
+          <div class="card-head">
+            <h2>Add project task</h2>
+            <p class="muted">Assign responsibility and time block.</p>
+          </div>
+
+          <form id="projectTaskForm" class="form-stack compact">
+            <label>
+              Title
+              <input id="taskTitle" required placeholder="Build chat module" />
+            </label>
+            <label>
+              Description
+              <textarea id="taskDescription" placeholder="Task details..."></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Assigned to
+                <select id="assignedTo"></select>
+              </label>
+              <label>
+                Quadrant
+                <select id="taskQuadrant">
+                  <option value="urgent-important">Urgent + Important</option>
+                  <option value="urgent-not-important">Urgent + Not important</option>
+                  <option value="not-urgent-important">Not urgent + Important</option>
+                  <option value="not-urgent-not-important">Not urgent + Not important</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                Due date
+                <input id="taskDueDate" type="date" required />
+              </label>
+              <label>
+                From
+                <input id="taskStartTime" type="time" required />
+              </label>
+              <label>
+                To
+                <input id="taskEndTime" type="time" required />
+              </label>
+            </div>
+            <button class="btn primary" type="submit">Add task</button>
+            <p id="taskMessage" class="message"></p>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Project progress</h2>
+            <p class="muted">How much of the board is actually done.</p>
+          </div>
+          <canvas id="projectChart" width="420" height="220"></canvas>
+        </article>
+      </section>
+
+      <section class="dashboard-grid lower">
+        <article class="card">
+          <div class="card-head">
+            <h2>Tasks</h2>
+            <p class="muted">Assigned work for this project.</p>
+          </div>
+          <div id="projectTasksList" class="item-list"></div>
+        </article>
+
+        <article class="card chat-card">
+          <div class="card-head">
+            <h2>Project chat</h2>
+            <p class="muted">A tiny room for project notes.</p>
+          </div>
+          <div id="chatMessages" class="chat-messages"></div>
+          <form id="chatForm" class="chat-form">
+            <input id="chatInput" placeholder="Write a message..." />
+            <button class="btn secondary" type="submit">Send</button>
+          </form>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/js/pages/project.js"></script>
+</body>
+</html>

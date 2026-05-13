@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Register</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body class="auth-page">
+  <div class="noise"></div>
+  <main class="auth-shell">
+    <section class="brand-panel pop-in">
+      <div class="logo-mark">??!</div>
+      <p class="eyebrow">Build your month before it builds you.</p>
+      <h1>LateAgain</h1>
+      <p class="muted">
+        Create your profile, add goals, invite friends, and manage team projects with a retro productivity system.
+      </p>
+      <div class="mini-stats">
+        <span>Goals</span>
+        <span>Matrix</span>
+        <span>Chat</span>
+      </div>
+    </section>
+
+    <section class="auth-card slide-up">
+      <h2>Create account</h2>
+      <p class="muted">Start with your email and password.</p>
+
+      <form id="registerForm" class="form-stack">
+        <label>
+          Email
+          <input type="email" id="email" required placeholder="you@email.com" />
+        </label>
+
+        <label>
+          Password
+          <input type="password" id="password" required minlength="6" placeholder="Minimum 6 characters" />
+        </label>
+
+        <button class="btn primary" type="submit">Create workspace</button>
+      </form>
+
+      <p id="authMessage" class="message"></p>
+
+      <p class="auth-switch">
+        Already registered?
+        <a href="./index.html">Login</a>
+      </p>
+    </section>
+  </main>
+
+  <script type="module" src="./assets/js/auth.js"></script>
+</body>
+</html>

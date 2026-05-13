@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Dashboard</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body class="app-page old-dashboard">
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-box">
+      <div class="orbit"></div>
+      <h1>LateAgain ??!</h1>
+      <p>Loading your time system...</p>
+    </div>
+  </div>
+  <div class="app-layout">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+      ☰
+    </button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <aside class="sidebar old-sidebar">
+    <div>
+      <a class="brand old-brand" href="./dashboard.html"><span class="logo-mark small">LA</span> LateAgain ??!</a>
+      <nav>
+        <a href="#calendar">Calendar</a>
+        <a href="#productivity">Productivity</a>
+        <a href="#matrix">Priority matrix</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./friends.html">Friends</a>
+        <a href="./projects.html">Projects</a>
+      </nav>
+    </div>
+    <div>
+      <p id="userEmail" class="muted tiny"></p>
+      <button id="logoutBtn" class="btn full">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar old-topbar">
+      <div>
+        <p class="eyebrow">Personal time operating system</p>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="actions">
+        <button id="prevMonthBtn" class="btn">←</button>
+        <button id="todayBtn" class="btn">Today</button>
+        <button id="nextMonthBtn" class="btn">→</button>
+      </div>
+    </header>
+
+    <section class="stats old-stats">
+      <div class="stat yellow"><span>Monthly score</span><b id="monthlyScore">0%</b></div>
+      <div class="stat pink"><span>Today progress</span><b id="todayScore">0%</b></div>
+      <div class="stat green"><span>Month tasks</span><b id="taskCount">0</b></div>
+      <div class="stat blue"><span>Events</span><b id="eventCount">0</b></div>
+    </section>
+
+    <section id="calendar" class="grid two">
+      <article class="card old-card">
+        <div class="section-title">
+          <div><p class="eyebrow">Monthly calendar</p><h2 id="monthTitle">Month</h2></div>
+          <div id="selectedDateChip" class="chip"></div>
+        </div>
+        <div class="weekdays old-weekdays">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div id="calendarGrid" class="calendar"></div>
+      </article>
+
+      <article class="card old-card">
+        <p class="eyebrow" id="itemFormMode">Add item</p>
+        <h2>Event / Task</h2>
+        <form id="itemForm" class="form compact">
+          <input id="editingItemId" type="hidden" />
+          <label>Type
+            <select id="itemType"><option value="task">Task</option><option value="event">Event</option></select>
+          </label>
+          <label>Title <input id="itemTitle" required placeholder="Study algorithms" /></label>
+          <div class="cols">
+            <label>Date <input id="itemDate" type="date" required /></label>
+            <label>Quadrant
+              <select id="itemQuadrant">
+                <option value="">None</option>
+                <option value="urgent-important">Urgent + Important</option>
+                <option value="urgent-not-important">Urgent + Not important</option>
+                <option value="not-urgent-important">Not urgent + Important</option>
+                <option value="not-urgent-not-important">Not urgent + Not important</option>
+              </select>
+            </label>
+          </div>
+          <div class="cols">
+            <label>From <input id="startTime" type="time" required /></label>
+            <label>To <input id="endTime" type="time" required /></label>
+          </div>
+          <label>Notes <textarea id="itemNotes" rows="3"></textarea></label>
+          <div class="form-actions">
+            <button id="itemSubmitBtn" class="btn primary" type="submit">Add to calendar</button>
+            <button id="cancelItemEdit" class="btn ghost hidden" type="button">Cancel edit</button>
+          </div>
+          <p id="itemMessage" class="message"></p>
+        </form>
+      </article>
+    </section>
+
+    <section class="grid lower">
+      <article class="card old-card">
+        <p class="eyebrow">Selected day</p>
+        <h2 id="dayTitle">Schedule</h2>
+        <div id="dayList" class="day-list"></div>
+      </article>
+
+      <article id="productivity" class="card old-card">
+        <div class="section-title">
+          <div><p class="eyebrow">Visualization</p><h2>Productivity graph</h2></div>
+          <div id="donut" class="donut"><span>0%</span></div>
+        </div>
+        <canvas id="productivityChart" width="900" height="320"></canvas>
+      </article>
+    </section>
+
+    <section id="matrix" class="card old-card matrix-card dark-matrix-card">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Monthly Eisenhower board</p>
+          <h2 id="matrixMonthTitle">Priority matrix</h2>
+        </div>
+        <p class="muted tiny">Tasks with quadrants + monthly priorities.</p>
+      </div>
+
+      <form id="matrixForm" class="matrix-form dark-matrix-form">
+        <input id="editingMatrixId" type="hidden" />
+        <input id="matrixTitle" placeholder="Add monthly priority..." required />
+        <select id="matrixQuadrant" required>
+          <option value="urgent-important">Urgent + Important</option>
+          <option value="urgent-not-important">Urgent + Not important</option>
+          <option value="not-urgent-important">Not urgent + Important</option>
+          <option value="not-urgent-not-important">Not urgent + Not important</option>
+        </select>
+        <button id="matrixSubmitBtn" class="btn primary" type="submit">Add</button>
+        <button id="cancelMatrixEdit" class="btn ghost hidden" type="button">Cancel</button>
+      </form>
+      <p id="matrixMessage" class="message"></p>
+
+      <div id="matrixGrid" class="matrix-grid dark-matrix-grid"></div>
+    </section>
+  </main>
+
+  <script type="module" src="./assets/js/pages/dashboard.js"></script>
+</body>
+</html>

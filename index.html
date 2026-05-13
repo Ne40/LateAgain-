@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Login</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body class="auth-page">
+  <div class="noise"></div>
+  <main class="auth-shell">
+    <section class="brand-panel pop-in">
+      <div class="logo-mark">LA</div>
+      <p class="eyebrow">Time is not late. You are.</p>
+      <h1>LateAgain ??!</h1>
+      <p class="muted">
+        Organize your days, projects, friends, goals, and productivity in one warm retro workspace.
+      </p>
+      <div class="mini-stats">
+        <span>Calendar</span>
+        <span>Projects</span>
+        <span>Friends</span>
+      </div>
+    </section>
+
+    <section class="auth-card slide-up">
+      <h2>Login</h2>
+      <p class="muted">Welcome back. Your tasks are waiting.</p>
+
+      <form id="loginForm" class="form-stack">
+        <label>
+          Email
+          <input type="email" id="email" required placeholder="you@email.com" />
+        </label>
+
+        <label>
+          Password
+          <input type="password" id="password" required placeholder="••••••••" />
+        </label>
+
+        <button class="btn primary" type="submit">Enter dashboard</button>
+      </form>
+
+      <p id="authMessage" class="message"></p>
+
+      <p class="auth-switch">
+        No account?
+        <a href="./register.html">Create one</a>
+      </p>
+    </section>
+  </main>
+
+  <script type="module" src="./assets/js/auth.js"></script>
+</body>
+</html>

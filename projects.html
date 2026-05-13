@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Projects</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-box">
+      <div class="orbit"></div>
+      <h1>Projects</h1>
+      <p>Preparing the team board...</p>
+    </div>
+  </div>
+
+  <div class="app-layout">
+      <div class="app-layout">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+      ☰
+    </button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <aside class="sidebar">
+      <a class="brand" href="./dashboard.html"><span class="logo-mark small">LA</span><strong>LateAgain</strong></a>
+      <nav class="nav-links">
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./friends.html">Friends</a>
+        <a class="active" href="./projects.html">Projects</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <p id="userEmail" class="muted tiny"></p>
+        <button id="logoutBtn" class="btn ghost full">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Team workspace</p>
+          <h1>Projects</h1>
+        </div>
+      </header>
+
+      <section class="dashboard-grid">
+        <article class="card">
+          <div class="card-head">
+            <h2>Create project</h2>
+            <p class="muted">Make a board, invite people, assign tasks, and chat.</p>
+          </div>
+
+          <form id="projectForm" class="form-stack compact">
+            <label>
+              Project name
+              <input id="projectName" required placeholder="LateAgain MVP" />
+            </label>
+            <label>
+              Description
+              <textarea id="projectDescription" placeholder="What are you building?"></textarea>
+            </label>
+            <button class="btn primary" type="submit">Create project</button>
+            <p id="projectMessage" class="message"></p>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Project invitations</h2>
+            <p class="muted">Invitations sent to your email appear here.</p>
+          </div>
+          <div id="projectInvites" class="item-list"></div>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>My projects</h2>
+          <p class="muted">Open a project to manage members, tasks, and chat.</p>
+        </div>
+        <div id="projectsGrid" class="project-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/js/pages/projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateAgain ??! | Friends</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-box">
+      <div class="orbit"></div>
+      <h1>Friends</h1>
+      <p>Checking who is late too...</p>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+      ☰
+    </button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <aside class="sidebar">
+      <a class="brand" href="./dashboard.html"><span class="logo-mark small">LA</span><strong>LateAgain</strong></a>
+      <nav class="nav-links">
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Profile</a>
+        <a class="active" href="./friends.html">Friends</a>
+        <a href="./projects.html">Projects</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <p id="userEmail" class="muted tiny"></p>
+        <button id="logoutBtn" class="btn ghost full">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Social productivity</p>
+          <h1>Friends</h1>
+        </div>
+        <input id="monthInput" class="month-input" type="month" />
+      </header>
+
+      <section class="dashboard-grid">
+        <article class="card">
+          <div class="card-head">
+            <h2>Add friend</h2>
+            <p class="muted">Send a request using their account email.</p>
+          </div>
+
+          <form id="friendForm" class="form-stack compact">
+            <label>
+              Friend email
+              <input id="friendEmail" type="email" required placeholder="friend@email.com" />
+            </label>
+            <button class="btn primary" type="submit">Send request</button>
+            <p id="friendMessage" class="message"></p>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Incoming requests</h2>
+            <p class="muted">Accept only people you actually know.</p>
+          </div>
+          <div id="requestsList" class="item-list"></div>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Your friends</h2>
+          <p class="muted">You can see their public profile, goals, and monthly productivity.</p>
+        </div>
+        <div id="friendsGrid" class="friends-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/js/pages/friends.js"></script>
+</body>
+</html>

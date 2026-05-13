@@ -1,0 +1,155 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function isFriend(userId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(userId)/friends/$(request.auth.uid));
+    }
+
+    function isProjectMember(projectId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/projects/$(projectId)/members/$(request.auth.uid));
+    }
+
+    function isProjectOwner(projectId) {
+      return signedIn()
+        && get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid;
+    }
+
+    function validProjectInvite(projectId, inviteId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/projectInvites/$(inviteId))
+        && get(/databases/$(database)/documents/projectInvites/$(inviteId)).data.projectId == projectId
+        && get(/databases/$(database)/documents/projectInvites/$(inviteId)).data.toEmail == request.auth.token.email
+        && get(/databases/$(database)/documents/projectInvites/$(inviteId)).data.status == "pending";
+    }
+
+    match /users/{userId} {
+      allow create, update, delete: if isOwner(userId);
+      allow read: if isOwner(userId) || isFriend(userId);
+
+      match /items/{itemId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /matrixItems/{itemId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /stats/{monthId} {
+        allow read: if isOwner(userId) || isFriend(userId);
+        allow write: if isOwner(userId);
+      }
+
+      match /friends/{friendId} {
+        allow read, update, delete: if isOwner(userId);
+
+        allow create: if isOwner(userId)
+          || (
+            signedIn()
+            && friendId == request.auth.uid
+            && request.resource.data.requestId is string
+            && exists(/databases/$(database)/documents/friendRequests/$(request.resource.data.requestId))
+            && get(/databases/$(database)/documents/friendRequests/$(request.resource.data.requestId)).data.fromUid == userId
+            && get(/databases/$(database)/documents/friendRequests/$(request.resource.data.requestId)).data.toEmail == request.auth.token.email
+          );
+      }
+
+      match /projects/{projectId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    match /friendRequests/{requestId} {
+      allow create: if signedIn()
+        && request.resource.data.fromUid == request.auth.uid
+        && request.resource.data.fromEmail == request.auth.token.email
+        && request.resource.data.status == "pending";
+
+      allow read: if signedIn()
+        && (
+          resource.data.fromUid == request.auth.uid
+          || resource.data.toEmail == request.auth.token.email
+        );
+
+      allow update: if signedIn()
+        && (
+          resource.data.toEmail == request.auth.token.email
+          || resource.data.fromUid == request.auth.uid
+        );
+
+      allow delete: if signedIn()
+        && (
+          resource.data.fromUid == request.auth.uid
+          || resource.data.toEmail == request.auth.token.email
+        );
+    }
+
+    match /projects/{projectId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid;
+
+      allow read: if isProjectMember(projectId);
+
+      allow update, delete: if isProjectOwner(projectId);
+
+      match /members/{memberId} {
+        allow read: if isProjectMember(projectId);
+
+        allow create: if signedIn()
+          && memberId == request.auth.uid
+          && (
+            getAfter(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid
+            || validProjectInvite(projectId, request.resource.data.inviteId)
+          );
+
+        allow update, delete: if isProjectOwner(projectId);
+      }
+
+      match /tasks/{taskId} {
+        allow read, create, update, delete: if isProjectMember(projectId);
+      }
+
+      match /messages/{messageId} {
+        allow read, create: if isProjectMember(projectId);
+
+        allow update, delete: if signedIn()
+          && isProjectMember(projectId)
+          && resource.data.senderId == request.auth.uid;
+      }
+    }
+
+    match /projectInvites/{inviteId} {
+      allow create: if signedIn()
+        && isProjectMember(request.resource.data.projectId)
+        && request.resource.data.fromUid == request.auth.uid
+        && request.resource.data.status == "pending";
+
+      allow read: if signedIn()
+        && (
+          resource.data.fromUid == request.auth.uid
+          || resource.data.toEmail == request.auth.token.email
+          || isProjectMember(resource.data.projectId)
+        );
+
+      allow update: if signedIn()
+        && (
+          resource.data.toEmail == request.auth.token.email
+          || isProjectMember(resource.data.projectId)
+        );
+
+      allow delete: if signedIn()
+        && isProjectMember(resource.data.projectId);
+    }
+  }
+}
