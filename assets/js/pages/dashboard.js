@@ -551,26 +551,3 @@ function getSidebar() {
     document.querySelector(".side-nav")
   );
 }
-
-function openMobileSidebar() {
-  const sidebar = getSidebar();
-  if (!sidebar) return;
-
-  sidebar.classList.add("open");
-  mobileBackdrop?.classList.add("show");
-}
-
-function closeMobileSidebar() {
-  const sidebar = getSidebar();
-  if (!sidebar) return;
-
-  sidebar.classList.remove("open");
-  mobileBackdrop?.classList.remove("show");
-}
-
-mobileMenuBtn?.addEventListener("click", openMobileSidebar);
-mobileBackdrop?.addEventListener("click", closeMobileSidebar);
-
-document.querySelectorAll(".sidebar a, .side-nav a").forEach((link) => {
-  link.addEventListener("click", closeMobileSidebar);
-});

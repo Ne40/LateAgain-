@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./assets/css/styles.css" />
   <link rel="icon" type="image/png" href="./assets/img/lateagain-logo.png">
 </head>
+
 <body class="app-page old-dashboard">
   <div id="loadingScreen" class="loading-screen">
     <div class="loader-box">
@@ -15,7 +16,8 @@
       <p>Loading your time system...</p>
     </div>
   </div>
-
+  <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">☰</button>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
   <aside class="sidebar old-sidebar">
     <div>
       <a class="brand old-brand" href="./dashboard.html"><span class="logo-mark small">LA</span> LateAgain ??!</a>
@@ -145,5 +147,6 @@
   </main>
 
   <script type="module" src="./assets/js/pages/dashboard.js"></script>
+  <script src="./assets/js/mobile-menu.js"></script>
 </body>
 </html>
